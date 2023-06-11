@@ -33,6 +33,7 @@
                 <Button
                     Width="100"
                     HorizontalAlignment="Right"
+                    Command="{Binding CropCommand}"
                     Content="Crop" />
             </Border>
         </StackPanel>
