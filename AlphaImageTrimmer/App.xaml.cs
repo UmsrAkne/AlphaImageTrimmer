@@ -1,6 +1,6 @@
-﻿using Prism.Ioc;
+﻿using System.Windows;
 using AlphaImageTrimmer.Views;
-using System.Windows;
+using Prism.Ioc;
 
 namespace AlphaImageTrimmer
 {
