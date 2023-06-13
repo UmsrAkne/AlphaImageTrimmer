@@ -22,13 +22,37 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Row="0" ItemsSource="{Binding BitmapFiles}" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Border Width="0" Margin="3,0" />
+            <TextBlock Width="300" Text="FileName" />
+            <Border Width="0" Margin="5,0" />
+            <TextBlock Width="50" Text="Width" />
+            <Border Width="0" Margin="5,0" />
+            <TextBlock Width="50" Text="Height" />
+        </StackPanel>
 
-        <StackPanel Grid.Row="1">
+        <ListBox Grid.Row="1" ItemsSource="{Binding BitmapFiles}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="models:ImageFileInfo">
+                    <Border>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="300" Text="{Binding FileInfo.FullName}" />
+                            <Border Width="0" Margin="5,0" />
+                            <TextBlock Width="50" Text="{Binding Width}" />
+                            <Border Width="0" Margin="5,0" />
+                            <TextBlock Width="50" Text="{Binding Height}" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="2">
             <Border Padding="5,2">
                 <Button
                     Width="100"
