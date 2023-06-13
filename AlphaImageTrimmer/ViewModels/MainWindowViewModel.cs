@@ -45,6 +45,12 @@ namespace AlphaImageTrimmer.ViewModels
                 var bmp = new Bitmap(bf.FileInfo.FullName);
                 var fileName = $@"{bf.FileInfo.DirectoryName}\{Path.GetFileNameWithoutExtension(bf.FileInfo.FullName)}_cut{bf.FileInfo.Extension}";
                 var rect = Trimmer.GetRect(bmp);
+
+                bf.Width = rect.Width;
+                bf.Height = rect.Height;
+                bf.X = rect.X;
+                bf.Y = rect.Y;
+
                 Trimmer.Crop(bmp, rect, fileName);
             }
         });
