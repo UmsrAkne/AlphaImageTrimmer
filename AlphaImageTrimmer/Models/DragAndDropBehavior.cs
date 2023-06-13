@@ -34,7 +34,7 @@ namespace AlphaImageTrimmer.Models
             {
                 vm.BitmapFiles =
                     files.Where(f => Path.GetExtension(f) == ".png")
-                        .Select(f => new FileInfo(f)).ToList();
+                        .Select(f => new ImageFileInfo(new FileInfo(f))).ToList();
             }
         }
 

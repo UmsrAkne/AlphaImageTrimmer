@@ -11,11 +11,11 @@ namespace AlphaImageTrimmer.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private string title = "Prism Application";
-        private List<FileInfo> bitmapFiles;
+        private List<ImageFileInfo> bitmapFiles;
 
         public string Title { get => title; set => SetProperty(ref title, value); }
 
-        public List<FileInfo> BitmapFiles
+        public List<ImageFileInfo> BitmapFiles
         {
             get => bitmapFiles;
             set
@@ -42,9 +42,15 @@ namespace AlphaImageTrimmer.ViewModels
 
             foreach (var bf in BitmapFiles)
             {
-                var bmp = new Bitmap(bf.FullName);
-                var fileName = $@"{bf.DirectoryName}\{Path.GetFileNameWithoutExtension(bf.FullName)}_cut{bf.Extension}";
+                var bmp = new Bitmap(bf.FileInfo.FullName);
+                var fileName = $@"{bf.FileInfo.DirectoryName}\{Path.GetFileNameWithoutExtension(bf.FileInfo.FullName)}_cut{bf.FileInfo.Extension}";
                 var rect = Trimmer.GetRect(bmp);
+
+                bf.Width = rect.Width;
+                bf.Height = rect.Height;
+                bf.X = rect.X;
+                bf.Y = rect.Y;
+
                 Trimmer.Crop(bmp, rect, fileName);
             }
         });
