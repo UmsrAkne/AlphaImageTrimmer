@@ -34,7 +34,8 @@
                     Width="100"
                     HorizontalAlignment="Right"
                     Command="{Binding CropCommand}"
-                    Content="Crop" />
+                    Content="Crop"
+                    IsEnabled="{Binding CanCrop}" />
             </Border>
         </StackPanel>
     </Grid>

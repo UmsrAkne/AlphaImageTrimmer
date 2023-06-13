@@ -15,7 +15,23 @@ namespace AlphaImageTrimmer.ViewModels
 
         public string Title { get => title; set => SetProperty(ref title, value); }
 
-        public List<FileInfo> BitmapFiles { get => bitmapFiles; set => SetProperty(ref bitmapFiles, value); }
+        public List<FileInfo> BitmapFiles
+        {
+            get => bitmapFiles;
+            set
+            {
+                SetProperty(ref bitmapFiles, value);
+                RaisePropertyChanged(nameof(CanCrop));
+            }
+        }
+
+        public bool CanCrop
+        {
+            get
+            {
+                return BitmapFiles != null && BitmapFiles.Count > 0;
+            }
+        }
 
         public DelegateCommand CropCommand => new DelegateCommand(() =>
         {
