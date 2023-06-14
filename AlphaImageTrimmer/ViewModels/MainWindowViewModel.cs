@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
+using System.Windows;
 using AlphaImageTrimmer.Models;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -53,6 +55,24 @@ namespace AlphaImageTrimmer.ViewModels
 
                 Trimmer.Crop(bmp, rect, fileName);
             }
+        });
+
+        public DelegateCommand CopyToClipboardCommand => new DelegateCommand(() =>
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("<root>");
+            foreach (ImageFileInfo m in BitmapFiles)
+            {
+                var x = $@"{nameof(ImageFileInfo.X)}=""{m.X}""";
+                var y = $@"{nameof(ImageFileInfo.Y)}=""{m.Y}""";
+                var w = $@"{nameof(ImageFileInfo.Width)}=""{m.Height}""";
+                var h = $@"{nameof(ImageFileInfo.Height)}=""{m.Height}""";
+                sb.AppendLine($"\t<image {x} {y} {w} {h} />");
+            }
+
+            sb.AppendLine("</root>");
+            Clipboard.SetDataObject(sb.ToString());
         });
     }
 }
